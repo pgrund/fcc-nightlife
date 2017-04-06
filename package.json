@@ -1,0 +1,72 @@
+{
+  "name": "fcc-nightlife",
+  "version": "1.0.1",
+  "description": "The elegant and lightweight boilerplate for full stack JavaScript.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johnstonbl01/clementinejs-fcc"
+  },
+  "keywords": [
+    "MongoDB",
+    "Mongoose",
+    "full stack",
+    "Express",
+    "Node",
+    "javascript",
+    "boilerplate"
+  ],
+  "browserify": {
+    "extensions": [
+      "jsx"
+    ],
+    "transform": [
+      [
+        "babelify"
+      ]
+    ]
+  },
+  "scripts": {
+    "start": "npm run build && node server.js",
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] ./app/components/index.jsx > ./app/public/js/app.js"
+  },
+  "author": "Blake Johnston",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-react": "^6.23.0",
+    "babelify": "^7.3.0",
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
+    "d3": "^4.7.1",
+    "dotenv": "^1.2.0",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "mongoose": "^4.9.2",
+    "passport": "^0.3.2",
+    "passport-github": "^1.1.0",
+    "passport-local": "^1.0.0",
+    "react": "^15.4.2",
+    "react-bootstrap": "^0.30.7",
+    "react-dom": "^15.4.2",
+    "reactify": "^1.1.1"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babelify": "^7.3.0",
+    "browserify": "^14.1.0",
+    "gulp": "^3.9.1",
+    "gulp-bower": "0.0.13",
+    "gulp-buffer": "0.0.2",
+    "gulp-connect": "^5.0.0",
+    "gulp-notify": "^3.0.0",
+    "gulp-ruby-sass": "^2.1.1",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-tap": "^0.1.3",
+    "gulp-uglify": "^2.1.2",
+    "gulp-util": "^3.0.8",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
+  }
+}
