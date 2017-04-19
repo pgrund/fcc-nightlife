@@ -25,12 +25,12 @@ module.exports = function (app, passport) {
 	});
 	app.route('/')
 		.get(function (req, res) {
-			 res.sendFile(path + '/dist/index.html');
+			 res.sendFile(path + '/client/dist/index.html');
 		});
 
 	app.route('/login')
 		.get(function (req, res) {
-      res.sendFile(path + '/dist/login.html');
+      res.sendFile(path + '/client/dist/login.html');
 		});
 
 	app.route('/logout')

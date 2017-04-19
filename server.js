@@ -9,11 +9,11 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 
 var app = express();
-require('dotenv').load();
-require('./app/config/passport')(passport);
+// require('dotenv').load();
+// require('./app/config/passport')(passport);
 
-mongoose.connect(process.env.MONGO_URI);
-mongoose.Promise = global.Promise;
+// mongoose.connect(process.env.MONGO_URI);
+// mongoose.Promise = global.Promise;
 
 
 // app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
@@ -36,8 +36,8 @@ app.use(session({
 	}
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // app.use('/lib', express.static(process.cwd() + '/dist'));
 
