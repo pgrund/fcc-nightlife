@@ -23,10 +23,6 @@ module.exports = function (app, passport) {
 	  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	  next();
 	});
-	app.route('/')
-		.get(function (req, res) {
-			 res.sendFile(path + '/client/dist/index.html');
-		});
 
 	app.route('/login')
 		.get(function (req, res) {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Test = ({}) => {
-  const handleClick = () => {alert('da');};
+  const handleClick = () => {alert('test');};
   return (
     <div onClick={handleClick}>TEST</div>
   );

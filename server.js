@@ -39,9 +39,11 @@ app.use(session({
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-// app.use('/lib', express.static(process.cwd() + '/dist'));
+//app.use('/', express.static(process.cwd() + '/client/dist/'));
 
 routes(app, passport);
+
+app.use(express.static(process.cwd() + '/client/dist'));
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {

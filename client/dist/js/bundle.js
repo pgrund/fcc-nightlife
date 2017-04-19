@@ -17,7 +17,7 @@ var Test = function Test(_ref) {
   _objectDestructuringEmpty(_ref);
 
   var handleClick = function handleClick() {
-    alert('da');
+    alert('test');
   };
   return _react2.default.createElement(
     'div',
