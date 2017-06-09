@@ -5,6 +5,7 @@ var path = process.cwd();
 
 module.exports = function (app, passport) {
 
+
 	function isLoggedIn (req, res, next) {
     console.log('check auth', req.isAuthenticated(), req.user);
 		if (req.isAuthenticated()) {
@@ -12,7 +13,7 @@ module.exports = function (app, passport) {
 		} else {
       console.log('not authenticated');
       req.session.returnTo = req.path;
-      res.redirect(302, '/login');
+      res.redirect(302, '/api/login');
 		}
 	}
 
@@ -26,7 +27,8 @@ module.exports = function (app, passport) {
 
 	app.route('/login')
 		.get(function (req, res) {
-      res.sendFile(path + '/client/dist/login.html');
+      res.send(401, 'login needed ...');
+      //res.sendFile(path + '/public/login.html');
 		});
 
 	app.route('/logout')

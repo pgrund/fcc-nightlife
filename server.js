@@ -41,9 +41,13 @@ app.use(session({
 
 //app.use('/', express.static(process.cwd() + '/client/dist/'));
 
-routes(app, passport);
+var router = express.Router();
 
-app.use(express.static(process.cwd() + '/client/dist'));
+routes(router, passport);
+
+app.use('/api', router);
+
+app.use(express.static(process.cwd() + '/public'));
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {

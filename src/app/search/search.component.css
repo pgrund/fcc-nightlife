@@ -1,0 +1,15 @@
+.site {
+  padding-top: 15px;
+}
+.site > div {
+  border-radius: 7px;
+  border: solid thin lightgray;
+  margin-top: 10px;
+  padding: 10px 5px;
+  box-shadow: 2px 5px  lightgray;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
