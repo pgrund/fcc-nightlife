@@ -14,7 +14,7 @@
     <i class="fa fa-sign-in"></i>
     Login
   </a>
-  <a class="btn" *ngIf="getUser() != null" (click)="logout()">
+  <a class="btn" *ngIf="getUser() != null" routerLink="/logout">
     <i class="fa fa-sign-out"></i>
     Logout
   </a>

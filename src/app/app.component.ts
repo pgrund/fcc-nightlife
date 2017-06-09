@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { SearchService } from './search/search.service';
-import { AuthenticationService } from './authentication.service';
+import { UserService } from './user.service';
 import { Router } from '@angular/router';
 
 import { User } from './model/user';
@@ -12,14 +12,14 @@ import { User } from './model/user';
   styleUrls: ['./app.component.css'],
   providers: [
     SearchService,
-    AuthenticationService
+    UserService
   ]
 })
 export class AppComponent {
 
 
   constructor(
-    private authService: AuthenticationService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -28,8 +28,7 @@ export class AppComponent {
   }
 
   logout() {
-    this.authService.logout();
-    localStorage.removeItem('currentUser');
+    this.userService.logout();
     this.router.navigate(['/']);
   }
 }

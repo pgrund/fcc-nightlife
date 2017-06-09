@@ -17,7 +17,6 @@ export class AuthenticationService {
       const match = (username.toLowerCase() == password.toLowerCase());
       if(match) {
         var user :  User = {name: username, searches: [], visits: []};
-        localStorage.setItem('currentUser', JSON.stringify(user));
         observer.next(user);
       } else {
         observer.error('not authenticated');
@@ -37,8 +36,5 @@ export class AuthenticationService {
                 }
             })
             */
-  }
-  logout() {
-    localStorage.removeItem('currentUser');
   }
 }
