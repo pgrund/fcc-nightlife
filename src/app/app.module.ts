@@ -15,6 +15,8 @@ import { AuthenticationService } from './authentication.service';
 import { UserResolve } from './user.resolve';
 import { UserService } from './user.service';
 
+import { AlertModule } from 'ngx-bootstrap/alert';
+
 const appRoutes: Routes = [
   { path: 'search', component: SearchComponent,
     resolve: {
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     JsonpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AlertModule.forRoot()
   ],
   providers: [
     AuthGuard,

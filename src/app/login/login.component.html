@@ -24,5 +24,8 @@
             <button [disabled]="loading" class="btn btn-default"><i class="fa fa-twitter fa-2x"></i></button>
             <button [disabled]="loading" class="btn btn-default"><i class="fa fa-github fa-2x"></i></button>
         </div>
+        <alert *ngIf="error" type="danger">
+          <strong>Oh snap!</strong> {{error}}
+        </alert>
     </form>
 </div>

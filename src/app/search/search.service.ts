@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Site } from '../model/site';
 
-@Injectable()
-export class SearchService {
 
-  yelpResponse = {
+  const YELP_RESPONSE = {
     "businesses": [
         {
             "categories": [
@@ -63,19 +61,37 @@ export class SearchService {
     "total": 2316
 };
 
+@Injectable()
+export class SearchService {
+
   constructor() { }
 
-  find(location: string) : any[] {
-    return this.yelpResponse.businesses; /*.map(b => {
-      return {
-        url: b.url,
-        snippet_text: b.snippet_text,
-        name: b.name,
-        display_phone: b.display_phone,
-        //display_address: b.display_address,
-        phone: b.phone,
-        rating: b.rating
-      };
-    });*/
+  private find( delay:number = 0): Promise<Site[]> {
+
+    return new Promise( function(resolve, reject) {
+      setTimeout(() => {
+        resolve(YELP_RESPONSE.businesses) /*.map(b => {
+          return {
+            url: b.url,
+            snippet_text: b.snippet_text,
+            name: b.name,
+            display_phone: b.display_phone,
+            //display_address: b.display_address,
+            phone: b.phone,
+            rating: b.rating
+          };
+        });*/
+        ;
+      }, delay);
+    });
+  }
+
+  findLocation(location: string) : Promise<Site[]> {
+    console.log('search for location', location);
+    return this.find(3000);
+  }
+  findLonLat(longitude: number, latitude: number) {
+    console.log('search for position', longitude, latitude);
+    return this.find();
   }
 }

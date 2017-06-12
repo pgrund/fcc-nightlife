@@ -12,8 +12,10 @@ import { User } from '../model/user';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  location: string;
+  location: string = "";
   sites: Site[];
+  private navigator: any;
+  loading: boolean = false;
 
   private user: User;
   constructor( private router: Router,
@@ -29,6 +31,9 @@ export class SearchComponent implements OnInit {
     if(this.user) {
       this.location = this.user.searches[0];
     }
+    this.navigator = window.navigator;
+    this.loading = false;
+    this.location = "";
     console.log('init search', this.user, this.location);
   }
 
@@ -36,7 +41,11 @@ export class SearchComponent implements OnInit {
     if( this.user) {
       this.user = this.userService.addSearch(location);
     }
-    this.sites = this.searchService.find(location);
+    this.loading = true;
+    this.searchService.findLocation(location).then(sites => {
+      this.loading = false;
+      this.sites = sites;
+    });
     console.log('search', this.user);
   }
 
@@ -49,5 +58,21 @@ export class SearchComponent implements OnInit {
       console.log('need to authenticate ...');
       this.router.navigate(['/login'], {queryParams: { visit: id}})
     }
+  }
+  onLocateMe(): void {
+    this.loading = true;
+    this.navigator.geolocation.getCurrentPosition(position => {
+      console.log('geolocation', position);
+      this.searchService.findLonLat(position.coords.longitude, position.coords.latitude).then(
+        sites => {
+            this.loading = false;
+            this.sites = sites;
+        }
+      );
+      this.loading = false;
+    }, error => {
+      console.error(error);
+      this.loading = false;
+    });
   }
 }

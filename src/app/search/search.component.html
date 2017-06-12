@@ -4,14 +4,17 @@
     <div class="input-group">
      <input type="text" class="form-control" [(ngModel)]="location" placeholder="Check for location ...">
      <span class="input-group-btn">
-       <button class="btn btn-default" type="button"><i class="fa fa-map-pin"></i></button>
-       <!--button class="btn btn-default" type="button"><i class="fa fa-map"></i></button-->
-       <button class="btn btn-default" (click)="onSearch(location)" type="button">Go!</button>
+       <button *ngIf="navigator.geolocation" class="btn btn-default" type="button" (click)="onLocateMe()"><i class="fa fa-map-pin"></i></button>
+       <button [disabled]="location.length<=0" class="btn btn-default" (click)="onSearch(location)" type="button">Go!</button>
      </span>
    </div>
  </div>
  <div class="row">
-   <div *ngIf="sites.length" class="site">
+   <alert *ngIf="loading" type="info" class="col-xs-12 text-center">
+     <strong><i class="fa fa-spinner fa-spin fa-4x"></i></strong>
+     <p>loading sites to visit ...</p>
+   </alert>
+   <div [hidden]="loading" *ngIf="sites.length" class="site">
       <div class="col-xs-12 row" *ngFor="let site of sites">
         <img [src]="site.image_url" class="col-xs-12 col-sm-4 col-md-2" />
         <div class="col-xs-12 col-sm-8">
