@@ -17,6 +17,36 @@ module.exports = function (app, passport) {
 		}
 	}
 
+function isJWTPresent(req, res, next) {
+  // check header or url parameters or post parameters for token
+ var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+ // decode token
+ if (token) {
+
+   // verifies secret and checks exp
+   jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+     if (err) {
+       return res.json({ success: false, message: 'Failed to authenticate token.' });
+     } else {
+       // if everything is good, save to request for use in other routes
+       req.decoded = decoded;
+       next();
+     }
+   });
+
+ } else {
+
+   // if there is no token
+   // return an error
+   return res.status(403).send({
+       success: false,
+       message: 'No token provided.'
+   });
+
+ }
+});
+
   // var pollHandler = new PollHandler();
 
 	app.use(function(req, res, next) {
@@ -51,7 +81,12 @@ module.exports = function (app, passport) {
             }
             ), function(req, res, next) {
               req.session.user = req.user;
-              res.json(req.user);
+              // if user is found and password is right
+               // return the information including token as JSON
+               res.user.token = jwt.sign(user, app.get('superSecret'), {
+                 expiresInMinutes: 1440 // expires in 24 hours
+               });
+               res.json(req.user);
           });
 
 
@@ -69,5 +104,24 @@ module.exports = function (app, passport) {
 	            res.json(req.user);
 			}
 		);
+
+    app.route('/search').get(isJWTPresent, (req, res) => {
+
+      console.log('passing on search ... ')
+    })
+
+    function jwt(req, res, next) {
+        // create authorization header with jwt token
+        if(req.isAuthenticated()) {
+          let currentUser = req.user;
+          let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+          return new RequestOptions({ headers: headers });
+        }
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.token) {
+            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
+            return new RequestOptions({ headers: headers });
+        }
+    }
 
 };

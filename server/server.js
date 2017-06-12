@@ -7,18 +7,18 @@ var passport = require('passport');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var morgan = require('morgan');
+var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 var app = express();
 // require('dotenv').load();
-// require('./app/config/passport')(passport);
+require('./app/passport')(passport);
 
-// mongoose.connect(process.env.MONGO_URI);
-// mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGO_URI);
+mongoose.Promise = global.Promise;
 
 
-// app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
-// app.use('/common', express.static(process.cwd() + '/app/common'));
-
+app.use(morgan('dev'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}));
 // parse application/json
@@ -26,18 +26,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(cookieParser());
 
-app.use(session({
-	secret: 'secretFccNightlife',
-	resave: false,
-  saveUninitialized: false,
-	cookie: {
-		httpOnly: false,
-		secure: false
-	}
-}));
 
 // app.use(passport.initialize());
-// app.use(passport.session());
 
 //app.use('/', express.static(process.cwd() + '/client/dist/'));
 
