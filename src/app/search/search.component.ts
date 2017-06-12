@@ -75,4 +75,12 @@ export class SearchComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  test(s) {
+    console.log(s);
+  }
+
+  rate(s): number {
+    return s*2;
+  }
 }

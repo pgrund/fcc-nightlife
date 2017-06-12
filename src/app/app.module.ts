@@ -16,6 +16,7 @@ import { UserResolve } from './user.resolve';
 import { UserService } from './user.service';
 
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { RatingModule } from 'ngx-bootstrap/rating';
 
 const appRoutes: Routes = [
   { path: 'search', component: SearchComponent,
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
     HttpModule,
     JsonpModule,
     RouterModule.forRoot(appRoutes),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    RatingModule.forRoot()
   ],
   providers: [
     AuthGuard,

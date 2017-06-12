@@ -15,15 +15,16 @@
      <p>loading sites to visit ...</p>
    </alert>
    <div [hidden]="loading" *ngIf="sites.length" class="site">
-      <div class="col-xs-12 row" *ngFor="let site of sites">
-        <img [src]="site.image_url" class="col-xs-12 col-sm-4 col-md-2" />
-        <div class="col-xs-12 col-sm-8">
-          <img [src]="site.rating_img_url" />
-          <span>({{site.review_count}} reviews)</span>
+      <div class="col-xs-12 row" *ngFor="let site of sites" (click)="test(site)">
+        <img [src]="site.image_url" class="col-xs-12 col-sm-3 col-md-2 img-responsive img-circle" />
+        <div class="col-xs-12 col-sm-9 col-md-8">
+          <img *ngIf="site.rating_img_url" [src]="site.rating_img_url" />
+          <rating [(ngModel)]="site.rating" [max]="10" [readonly]="true"></rating>
+          <span>({{site.reviews}} reviews)</span>
           <p class="lead">{{ site.name }}</p>
-          <p>{{ site.snippet_text}}</p>
+          <p>{{ site.description}}</p>
         </div>
-        <div class="col-xs-12 col-md-2 text-success text-center">
+        <div class="col-xs-12 col-sm-12 col-md-2 text-success text-right">
             <i class="fa fa-4x fa-user-plus" [routerLink]="['/visiting', site.id]"></i>
         </div>
       </div>
